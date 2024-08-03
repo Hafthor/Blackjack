@@ -10,8 +10,9 @@ public class Hand {
     public int Value {
         get {
             int value = Cards.Sum(c => c.Value);
-            if (value <= 11 && Cards.Any(c => c.Rank == Rank.Ace))
+            if (value + 10 <= 21 && Cards.Any(c => c.Rank == Rank.Ace)) {
                 value += 10;
+            }
             return value;
         }
     }
