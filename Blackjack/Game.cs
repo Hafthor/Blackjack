@@ -1,52 +1,49 @@
 namespace Blackjack;
 
 public class Game {
-    private readonly Deck deck;
-    private readonly Hand player, dealer;
+    private readonly Deck _deck;
+    private readonly Hand _player, _dealer;
 
     public Game(Deck deck) {
-        this.deck = deck;
-        player = new Hand(deck);
-        dealer = new Hand(deck);
+        _deck = deck;
+        _player = new Hand(deck);
+        _dealer = new Hand(deck);
     }
 
     public void Play() {
         const int blackjack = 21, dealerLimit = 16;
-        Console.WriteLine("Dealer: " + dealer.Cards[0] + ", ??");
-        Console.Write("Player: " + player + " - ");
-        while (player.Value < blackjack) {
+        Console.WriteLine("Dealer: " + _dealer.Cards[0] + ", ??");
+        Console.Write("Player: " + _player + " - ");
+        while (_player.Value < blackjack) {
             Console.Write("Hit? ");
             string response = (Console.ReadLine() ?? "").ToLower();
             if (response.StartsWith('y') || response.StartsWith('h')) {
-                player.Hit(deck);
-                Console.Write("Player: " + player + " - ");
-            } else if (response.StartsWith('n') || response.StartsWith('s')) {
+                _player.Hit(_deck);
+                Console.Write("Player: " + _player + " - ");
+            } else if (response.StartsWith('n') || response.StartsWith('s'))
                 break;
-            }
         }
 
-        if (player.Value == blackjack) {
-            if (player.Cards.Count == 2) {
+        if (_player.Value == blackjack) {
+            if (_player.Cards.Count == 2)
                 Console.Write("Blackjack - ");
-            }
             Console.WriteLine("Player wins");
-        } else if (player.Value > blackjack) {
+        } else if (_player.Value > blackjack)
             Console.WriteLine("Player busts");
-        } else {
-            while (dealer.Value <= dealerLimit) {
-                Console.WriteLine("Dealer: " + dealer + " - Dealer hits");
-                dealer.Hit(deck);
+        else {
+            while (_dealer.Value <= dealerLimit) {
+                Console.WriteLine("Dealer: " + _dealer + " - Dealer hits");
+                _dealer.Hit(_deck);
             }
-            Console.Write("Dealer: " + dealer + " - ");
-            if (dealer.Value > blackjack) {
+            Console.Write("Dealer: " + _dealer + " - ");
+            if (_dealer.Value > blackjack)
                 Console.WriteLine("Dealer busts");
-            } else if (dealer.Value > player.Value) {
+            else if (_dealer.Value > _player.Value)
                 Console.WriteLine("Dealer wins");
-            } else if (dealer.Value < player.Value) {
+            else if (_dealer.Value < _player.Value)
                 Console.WriteLine("Player wins");
-            } else {
+            else
                 Console.WriteLine("Push");
-            }
         }
     }
 }

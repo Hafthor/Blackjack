@@ -1,15 +1,9 @@
 namespace Blackjack;
 
-public class Card {
-    public Suit Suit { get; }
-    public Rank Rank { get; }
-    public int Value { get; }
-
-    public Card(Suit suit, Rank rank) {
-        Suit = suit;
-        Rank = rank;
-        Value = (int)rank > 10 ? 10 : (int)rank;
-    }
+public class Card(Suit suit, Rank rank) {
+    public Suit Suit { get; } = suit;
+    public Rank Rank { get; } = rank;
+    public int Value { get; } = (int)rank > 10 ? 10 : (int)rank;
 
     public override string ToString() =>
         (Rank is > Rank.Ace and < Rank.Ten ? ((int)Rank).ToString() : Rank.ToString()[..1]) +

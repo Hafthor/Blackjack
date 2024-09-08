@@ -2,8 +2,7 @@
 
 public static class Program {
     public static void Main() {
-        Random rand = new();
-        for (;;) {
+        for (Random rand = new();;) {
             Deck deck = new();
             deck.Shuffle(rand);
             int limit = deck.Cards.Count / 2;
